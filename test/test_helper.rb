@@ -36,3 +36,19 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
+
+class Shoulda::ActionController::Matchers::RouteMatcher
+  def description
+    "route #{@method.to_s.upcase} #{@path} to/from #{serialize_params(@params)}"
+  end
+
+  def serialize_params(params)
+    sorted_keys = params.keys.sort{|l,r| l.inspect <=> r.inspect}
+    keys_and_values = sorted_keys.inject([]) do |pairs, key|
+      pairs << "#{key.inspect}=>#{params[key].inspect}"
+      pairs
+    end.join(", ")
+    "{" + keys_and_values + "}"
+  end
+end
+

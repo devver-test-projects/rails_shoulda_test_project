@@ -1,6 +1,6 @@
-module Admin; end
+module Main; end
 
-class Admin::PostsController < ApplicationController
+class Main::PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
